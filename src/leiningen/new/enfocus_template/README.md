@@ -5,9 +5,8 @@ A website written with Enfocus in ClojureScript.
 ## Usage
 
 ```bash
-lein deps
 lein cljsbuild once
-lein run
+lein ring server
 ```
 
 ## License
