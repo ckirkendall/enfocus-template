@@ -1,4 +1,4 @@
-# cljs-template
+# enfocus-template
 
 A Leiningen template for Enfocus ClojureScript projects.
 
