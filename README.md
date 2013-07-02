@@ -25,9 +25,10 @@ lein new enfocus-template my-project
 ```
 You now have a complete ClojureScript app, nothing more needed :)
 
-## Running Your New Application
+## Launching the App
 
 ```bash
+cd my-project
 lein cljsbuild once
 lein ring server
 ```
