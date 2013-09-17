@@ -12,7 +12,7 @@
 ;;************************************************
 (def dev-mode true)
 
-(defn repl-connect [] 
+(defn repl-connect []
  (when dev-mode
    (repl/connect "http://localhost:9000/repl")))
 
@@ -27,7 +27,7 @@
 (defn get-name []
  (ef/from (by-id "yourname") (ef/get-prop :value)))
 
-;; if from is passed a set lookups it returns 
+;; if from is passed a set lookups it returns
 ;; a map {:fruit "apple" :quanity "10" }
 (defn get-fruit-vals []
  (ef/from js/document
@@ -39,27 +39,27 @@
 ;; snippets and templates
 ;;************************************************
 
-;; we can use enlive based selects 
+;; we can use enlive based selects
 ;; along side string based selectors
-(defsnippet home-snip :compiled "public/index.html" [:#stage] []) 
-  
+(defsnippet home-snip :compiled "public/index.html" [:#stage] [])
+
 (deftemplate welcome-temp :compiled "public/templates/welcome.html" [name]
    "#name" (ef/content name)
    "#time" (ef/content (.toISOString (js/Date.))))
 
 ;note selectors can be vectors or bare strings
-(defsnippet fruit-snip :compiled "public/templates/welcome.html" 
+(defsnippet fruit-snip :compiled "public/templates/welcome.html"
   ["tbody > *:first-child"] [fruit quantity]
   ["tr > *:first-child"] (ef/content fruit)
-  ["tr > *:last-child"]  (ef/content quantity)) 
-   
+  ["tr > *:last-child"]  (ef/content quantity))
+
 
 ;;************************************************
 ;; actions/navigation
 ;;************************************************
 
 (defaction add-fruit [data]
-  "tbody" (ef/append (fruit-snip (:fruit data) (:quanity data))))  
+  "tbody" (ef/append (fruit-snip (:fruit data) (:quanity data))))
 
 (defaction welcome []
   "#stage" (ef/substitute (welcome-temp (get-name)))
@@ -71,7 +71,7 @@
   "#stage" (ef/substitute (home-snip))
   "#home-btn" (ef/add-class "active")
   "#welcome-btn" (events/listen :click welcome))
-                
+
 (defaction init []
   "#home-btn" (events/listen :click home))
 ;;************************************************
